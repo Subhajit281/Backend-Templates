@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Socket.IO Test Client</title>
+</head>
+<body>
+
+    <h1>Socket.IO Test Client</h1>
+
+    <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+
+    <script>
+
+        // Make socket globally available
+        window.socket = io("http://localhost:5000");
+
+        socket.on("connect", () => {
+
+            console.log("Connected");
+            console.log("Socket ID:", socket.id);
+
+        });
+
+        socket.on("disconnect", () => {
+
+            console.log("Disconnected");
+
+        });
+
+        socket.on("register-success", (data) => {
+
+            console.log("Register Success");
+            console.log(data);
+
+        });
+
+        socket.on("message-status", (data) => {
+
+            console.log("Message Status");
+            console.log(data);
+
+        });
+
+        socket.on("private-message", (data) => {
+
+            console.log("Private Message");
+            console.log(data);
+
+        });
+
+        socket.on("typing", (data) => {
+
+            console.log("Typing Event");
+            console.log(data);
+
+        });
+
+        socket.onAny((event, ...args) => {
+
+            console.log("📡 Event Received:", event);
+            console.log("Payload:", args);
+
+        });
+
+        socket.on(
+            "room-joined",
+            (data)=>{
+                console.log("Room Joined");
+                console.log(data);
+            }
+        );
+
+        socket.on(
+            "room-left",
+            (data)=>{
+                console.log("Room Left");
+                console.log(data);
+            }
+        );
+
+        socket.on(
+            "room-message",
+            (data)=>{
+                console.log("Room Message");
+                console.log(data);
+            }
+        );
+
+    </script>
+
+</body>
+</html>
